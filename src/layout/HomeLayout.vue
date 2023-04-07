@@ -9,13 +9,13 @@
         mode="horizontal"
         :router="true"
       >
-        <el-menu-item index="0">LOGO</el-menu-item>
+        <el-menu-item index="0">数学家族谱的可视化系统</el-menu-item>
       </el-menu>
     </el-header>
     <el-container>
       <el-aside width="15%">
         <el-menu
-          default-active="1"
+          default-active="/all"
           active-text-color="#ffd04b"
           background-color="#545c64"
           text-color="#fff"
@@ -29,9 +29,9 @@
       <el-main>
         <router-view v-slot="{ Component }">
           <keep-alive>
-            <component :is="Component" v-if="$route.meta.keepAlive" />
+            <component :is="Component" :key="$route.name" v-if="$route.meta.keepAlive" />
           </keep-alive>
-          <component :is="Component" v-if="!$route.meta.keepAlive" />
+          <component :is="Component" :key="$route.name" v-if="!$route.meta.keepAlive" />
         </router-view>
       </el-main>
     </el-container>

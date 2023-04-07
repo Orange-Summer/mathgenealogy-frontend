@@ -3,8 +3,13 @@
   height: 100%;
 }
 
+.el-aside {
+  height: calc(100vh - 60px); // 设置左侧 aside 高度
+}
+
 .el-main {
   padding: 0;
+  height: calc(100vh - 60px);
 }
 
 //header 紧贴左右

@@ -43,47 +43,72 @@
       </el-row>
     </el-col>
   </el-row>
+  <el-row>
+    <TreeGraph :treeData="treeData"></TreeGraph>
+  </el-row>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watchEffect } from 'vue'
-import { getMathematicianTree } from '@/api/graph'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, onUnmounted, reactive, ref, watchEffect } from 'vue';
+import { getMathematicianTree } from '@/api/graph';
+import { useRoute, useRouter } from 'vue-router';
+import TreeGraph from '@/components/TreeGraph.vue';
 
-const router = useRouter()
-const route = useRoute()
+const router = useRouter();
+const route = useRoute();
 
 const data = reactive({
-  students: [],
-  advisors: []
-})
+  students: {},
+  advisors: {}
+});
 
-const url = ref('')
+const url = ref('');
 
+//加载数据
 function loadData(mid: any, depth: number) {
   getMathematicianTree({ mid, depth }).then((res) => {
-    data.students = res.data[0]
-    data.advisors = res.data[1]
-  })
-  url.value = 'https://mathgenealogy.org/id.php?id=' + mid
+    data.students = res.data[0];
+    data.advisors = res.data[1];
+  });
+  url.value = 'https://mathgenealogy.org/id.php?id=' + mid;
 }
 
+//跳转其他数学家个人详情
 function handlePerson(index: number, type: number) {
-  let id = 0
+  let id = 0;
   if (type == 1) {
-    id = data.advisors['children'][index]['mid']
+    id = data.advisors['children'][index]['mid'];
   } else if (type == 2) {
-    id = data.students['children'][index]['mid']
+    id = data.students['children'][index]['mid'];
   }
   router.push({
     name: 'person',
     params: { id }
-  })
+  });
 }
 
-watchEffect(() => {
-  loadData(route.params.id, 3)
-})
+//监控 route id 重新加载数据
+const idChange = watchEffect(() => {
+  loadData(route.params.id, 2);
+});
+
+onUnmounted(() => {
+  idChange();
+});
+
+// 计算传到 TreeGraph 中的值
+const treeData = computed(() => {
+  let temp = JSON.parse(JSON.stringify(data));
+  let treeData = temp.students;
+  if (temp.advisors.children && temp.advisors.children.length > 0) {
+    if (temp.students.children) {
+      treeData.children.push(...temp.advisors.children);
+    } else {
+      treeData.children = temp.advisors.children;
+    }
+  }
+  return reactive(treeData);
+});
 </script>
 
 <style scoped></style>
