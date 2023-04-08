@@ -24,6 +24,9 @@
           <el-menu-item title="数学家列表" index="/all">
             <span>数学家列表</span>
           </el-menu-item>
+          <el-menu-item title="总体统计" index="/total">
+            <span>总体统计</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>

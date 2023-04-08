@@ -5,28 +5,36 @@
 <script setup>
 import G6 from '@antv/g6';
 import { onMounted, ref, watchEffect } from 'vue';
+import { getMathematicianTree } from '@/api/graph';
 
-const props = defineProps(['treeData']);
-let data;
+const props = defineProps(['mid']);
 
 // 画布实例和挂载容器
 let graph;
 const container = ref(null);
 
 onMounted(() => {
-  // console.log(container.value);
   watchEffect(() => {
-    if (props.treeData.id) {
-      console.log(props);
-      data = JSON.parse(JSON.stringify(props.treeData));
-      console.log(data);
-      createGraph();
+    if (props.mid !== 0) {
+      loadData(props.mid, 2);
     }
   });
 });
 
+function loadData(mid, depth) {
+  getMathematicianTree({ mid, depth })
+    .then((res) => res.data)
+    .then((data) => {
+      if (graph) {
+        console.log('aaaaa');
+      } else {
+        createGraph(data);
+      }
+    });
+}
+
 //画树图
-function createGraph() {
+function createGraph(data) {
   const width = container.value.scrollWidth;
   const height = container.value.scrollHeight || 500;
   graph = new G6.TreeGraph({

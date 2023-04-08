@@ -25,6 +25,14 @@ const router = createRouter({
           meta: {
             keepAlive: true
           }
+        },
+        {
+          path: 'total',
+          name: 'total',
+          component: () => import('@/views/TotalInfo.vue'),
+          meta: {
+            keepAlive: true
+          }
         }
       ]
     }
