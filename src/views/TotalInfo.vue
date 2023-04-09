@@ -19,22 +19,21 @@
           v-if="showData.showInstitutionData"
         ></ColumnChart>
       </el-tab-pane>
-      <el-tab-pane label="各学科数学家数量">
+      <el-tab-pane label="各学科数学家数量" lazy>
         <ColumnChart
           :data="data.classificationCount"
           :x="'classification'"
           :y="'num'"
-          :index="1"
+          :index="2"
           v-if="showData.showClassificationData"
         ></ColumnChart>
       </el-tab-pane>
-      <el-tab-pane label="Task">Task</el-tab-pane>
     </el-tabs>
   </el-row>
 </template>
 
 <script setup lang="ts">
-import {getClassificationCount, getCountryCount, getInstitutionCount} from '@/api/basic';
+import { getClassificationCount, getCountryCount, getInstitutionCount } from '@/api/basic';
 import { onMounted, reactive } from 'vue';
 import { ElMessage } from 'element-plus';
 import ColumnChart from '@/components/ColumnChart.vue';
@@ -52,7 +51,7 @@ const showData = reactive({
 
 function loadCountryData() {
   getCountryCount().then((res) => {
-    if (res.code == 1) {
+    if (res.code == 1000) {
       data.countryCount = res.data;
     } else {
       ElMessage.error(res.msg);
@@ -63,7 +62,7 @@ function loadCountryData() {
 
 function loadInstitutionData() {
   getInstitutionCount().then((res) => {
-    if (res.code == 1) {
+    if (res.code == 1000) {
       data.institutionCount = res.data;
     } else {
       ElMessage.error(res.msg);
@@ -73,19 +72,20 @@ function loadInstitutionData() {
 }
 
 function loadClassificationData() {
-    getClassificationCount().then((res) => {
-        if (res.code == 1) {
-            data.classificationCount = res.data;
-        } else {
-            ElMessage.error(res.msg);
-        }
-        showData.showClassificationData = true;
-    });
+  getClassificationCount().then((res) => {
+    if (res.code == 1) {
+      data.classificationCount = res.data;
+    } else {
+      ElMessage.error(res.msg);
+    }
+    showData.showClassificationData = true;
+  });
 }
 
 onMounted(() => {
   loadCountryData();
   loadInstitutionData();
+  loadClassificationData();
 });
 </script>
 

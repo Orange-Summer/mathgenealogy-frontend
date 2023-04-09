@@ -30,7 +30,7 @@ function createChart(data) {
     container: container,
     theme: 'classic',
     width: 1150,
-    height: 525
+    height: 600
   });
 
   // 声明可视化

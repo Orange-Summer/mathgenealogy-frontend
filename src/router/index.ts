@@ -33,6 +33,14 @@ const router = createRouter({
           meta: {
             keepAlive: true
           }
+        },
+        {
+          path: 'year',
+          name: 'year',
+          component: () => import('@/views/YearDividedInfo.vue'),
+          meta: {
+            keepAlive: true
+          }
         }
       ]
     }

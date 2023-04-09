@@ -27,6 +27,9 @@
           <el-menu-item title="总体统计" index="/total">
             <span>总体统计</span>
           </el-menu-item>
+          <el-menu-item title="按年份分析" index="/year">
+            <span>按年份分析</span>
+          </el-menu-item>
         </el-menu>
       </el-aside>
       <el-main>

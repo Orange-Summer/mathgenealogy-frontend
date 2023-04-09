@@ -5,8 +5,6 @@ import App from './App.vue'
 import router from './router'
 import '@/assets/styles/element-ui-reset.scss'
 
-// import './assets/main.css'
-
 const app = createApp(App)
 
 app.use(createPinia())

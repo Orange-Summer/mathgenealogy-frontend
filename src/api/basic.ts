@@ -28,7 +28,7 @@ export const getInstitutionCount = () => {
 };
 
 export const getClassificationCount = () => {
-  return axios.get(`${BASIC_MODULE}/getInstitutionCount`).then((res) => {
+  return axios.get(`${BASIC_MODULE}/getClassificationCount`).then((res) => {
     return res.data;
   });
 };
