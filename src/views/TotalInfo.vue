@@ -1,31 +1,13 @@
 <template>
   <el-row>
     <el-tabs type="border-card" :stretch="true">
-      <el-tab-pane label="各国数学家数量">
+      <el-tab-pane v-for="(item, index) in paneData" :key="index" :label="item.label" lazy>
         <ColumnChart
-          :data="data.countryCount"
-          :x="'country'"
-          :y="'num'"
-          :index="0"
-          v-if="showData.showCountryData"
-        ></ColumnChart>
-      </el-tab-pane>
-      <el-tab-pane label="各学校数学家数量" lazy>
-        <ColumnChart
-          :data="data.institutionCount"
-          :x="'institution'"
-          :y="'num'"
-          :index="1"
-          v-if="showData.showInstitutionData"
-        ></ColumnChart>
-      </el-tab-pane>
-      <el-tab-pane label="各学科数学家数量" lazy>
-        <ColumnChart
-          :data="data.classificationCount"
-          :x="'classification'"
-          :y="'num'"
-          :index="2"
-          v-if="showData.showClassificationData"
+          :data="item.data"
+          :x="item.x"
+          :y="item.y"
+          :index="index"
+          v-if="item.show"
         ></ColumnChart>
       </el-tab-pane>
     </el-tabs>
@@ -38,47 +20,60 @@ import { onMounted, reactive } from 'vue';
 import { ElMessage } from 'element-plus';
 import ColumnChart from '@/components/ColumnChart.vue';
 
-const data = reactive({
-  countryCount: [],
-  institutionCount: [],
-  classificationCount: []
-});
-const showData = reactive({
-  showCountryData: false,
-  showInstitutionData: false,
-  showClassificationData: false
-});
+const paneData = reactive([
+  {
+    label: '各国数学家数量',
+    data: [],
+    x: 'country',
+    y: 'num',
+    show: false
+  },
+  {
+    label: '各学校数学家数量',
+    data: [],
+    x: 'institution',
+    y: 'num',
+    show: false
+  },
+  {
+    label: '各学科数学家数量',
+    data: [],
+    x: 'classification',
+    y: 'num',
+    show: false
+  }
+]);
 
 function loadCountryData() {
   getCountryCount().then((res) => {
     if (res.code == 1000) {
-      data.countryCount = res.data;
+      paneData[0].data = res.data;
     } else {
       ElMessage.error(res.msg);
     }
-    showData.showCountryData = true;
+    paneData[0].show = true;
   });
 }
 
 function loadInstitutionData() {
   getInstitutionCount().then((res) => {
     if (res.code == 1000) {
-      data.institutionCount = res.data;
+      paneData[1].data = res.data;
     } else {
       ElMessage.error(res.msg);
     }
-    showData.showInstitutionData = true;
+    paneData[1].show = true;
   });
 }
 
 function loadClassificationData() {
   getClassificationCount().then((res) => {
-    if (res.code == 1) {
-      data.classificationCount = res.data;
+    if (res.code == 1000) {
+      paneData[2].data = res.data;
     } else {
       ElMessage.error(res.msg);
     }
-    showData.showClassificationData = true;
+    paneData[2].show = true;
   });
 }
 

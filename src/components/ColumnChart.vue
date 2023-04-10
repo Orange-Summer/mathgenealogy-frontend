@@ -3,14 +3,14 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, watchEffect } from 'vue';
 import { Chart } from '@antv/g2';
 
-const props = defineProps(['data', 'x', 'y','index']);
+const props = defineProps(['data', 'x', 'y', 'index']);
 
 let chart;
 // eslint-disable-next-line vue/no-setup-props-destructure
-const data = props.data;
+let data = props.data;
 // eslint-disable-next-line vue/no-setup-props-destructure
 const x = props.x;
 // eslint-disable-next-line vue/no-setup-props-destructure
@@ -21,6 +21,10 @@ const index = props.index;
 onMounted(() => {
   // console.log(props.data);
   createChart(data);
+  watchEffect(() => {
+    data = props.data;
+    chart.changeData(data);
+  });
 });
 
 function createChart(data) {

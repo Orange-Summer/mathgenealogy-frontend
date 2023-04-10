@@ -9,7 +9,7 @@
         mode="horizontal"
         :router="true"
       >
-        <el-menu-item index="0">数学家族谱的可视化系统</el-menu-item>
+        <el-menu-item>数学家族谱的可视化系统</el-menu-item>
       </el-menu>
     </el-header>
     <el-container>

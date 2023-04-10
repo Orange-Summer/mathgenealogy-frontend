@@ -10,7 +10,7 @@ const props = defineProps(['data', 'id', 'value', 'index']);
 
 let chart;
 // eslint-disable-next-line vue/no-setup-props-destructure
-const data = props.data;
+let data = props.data;
 // eslint-disable-next-line vue/no-setup-props-destructure
 const id = props.id;
 // eslint-disable-next-line vue/no-setup-props-destructure
@@ -22,7 +22,8 @@ onMounted(() => {
   // console.log(props.data);
   createChart(data);
   watchEffect(() => {
-    chart.changeData(props.data);
+    data = props.data;
+    chart.changeData(data);
   });
 });
 

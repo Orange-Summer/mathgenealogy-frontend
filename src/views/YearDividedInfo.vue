@@ -56,7 +56,7 @@ const yearRange = reactive({
 
 function loadYearCountryData(start: number, end: number) {
   getYearCountryCount({ start, end }).then((res) => {
-    console.log(res);
+    // console.log(res);
     if (res.code == 1000) {
       paneData[0].data = res.data;
     } else {
