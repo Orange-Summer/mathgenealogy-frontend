@@ -25,7 +25,7 @@
         v-model:current-page="pageData.currPage"
         v-model:page-size="pageData.pageSize"
         :page-sizes="[20, 50, 100, 1000]"
-        :pager-count="9"
+        pager-count="9"
         :background="true"
         layout="total, sizes, prev, pager, next, jumper"
         :total="pageData.total"
@@ -103,7 +103,7 @@ function handlePerson(index: number) {
   const id = listData.data[index]['mid'];
   router.push({
     name: 'person',
-    params: { id }
+    params: { id: id }
   });
 }
 </script>

@@ -48,11 +48,16 @@
   <el-row>
     <el-card>
       <template #header>
-          <el-row justify="center" style="margin: 0 0">
-              <span style="font-size: x-large;">可视化树图</span>
-          </el-row>
+        <el-row justify="center" style="margin: 0 0">
+          <span style="font-size: x-large">可视化树图</span>
+        </el-row>
       </template>
-      <TreeGraph :data="treeData" v-if="showTree"></TreeGraph>
+      <TreeGraph
+        :data="treeData"
+        v-if="showTree"
+        @jump="handleTreeJump"
+        @warningMessage="treeWarningMessage"
+      ></TreeGraph>
     </el-card>
   </el-row>
 </template>
@@ -62,7 +67,8 @@ import { reactive, ref, watchEffect } from 'vue';
 import { onBeforeRouteLeave, useRoute, useRouter } from 'vue-router';
 import TreeGraph from '@/components/TreeGraph.vue';
 import { getMathematician } from '@/api/basic';
-import { getMathematicianTree } from '@/api/graph';
+import { getTree } from '@/api/graph';
+import { ElMessage } from 'element-plus';
 
 const router = useRouter();
 const route = useRoute();
@@ -112,14 +118,14 @@ function handlePerson(index: number, type: number) {
   }
   router.push({
     name: 'person',
-    params: { id }
+    params: { id: id }
   });
 }
 
 // 监控 route id 重新加载数据
 const idChange = watchEffect(() => {
   loadData(route.params.id);
-  loadTreeData(route.params.id, 2);
+  loadTreeData(route.params.id, 3);
 });
 // 退出路由时注销 watch
 onBeforeRouteLeave(() => {
@@ -131,10 +137,23 @@ const showTree = ref(false);
 const treeData = ref();
 
 function loadTreeData(mid: any, depth: number) {
-  getMathematicianTree({ mid, depth }).then((res) => {
+  getTree({ mid, depth }).then((res) => {
     treeData.value = res.data;
     showTree.value = true;
   });
+}
+
+// 双击树图节点跳转
+function handleTreeJump(id: number | string) {
+  router.push({
+    name: 'person',
+    params: { id: id }
+  });
+}
+
+// 树图消息提示
+function treeWarningMessage(msg: string) {
+  ElMessage.warning(msg);
 }
 </script>
 

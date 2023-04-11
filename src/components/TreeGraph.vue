@@ -5,8 +5,10 @@
 <script setup>
 import G6 from '@antv/g6';
 import { onMounted, ref, watchEffect } from 'vue';
+import { getAdvisorTree, getStudentTree } from '@/api/graph';
 
 const props = defineProps(['data']);
+const emit = defineEmits(['jump', 'warningMessage']);
 
 // eslint-disable-next-line vue/no-setup-props-destructure
 let data = JSON.parse(JSON.stringify(props.data));
@@ -15,10 +17,10 @@ let graph;
 const container = ref(null);
 
 onMounted(() => {
-  console.log(data);
   createGraph();
   watchEffect(() => {
     data = JSON.parse(JSON.stringify(props.data));
+    // 更新数据重新渲染树图
     graph.clear();
     graph.data(data);
     graph.render();
@@ -165,6 +167,51 @@ function createGraph() {
   // graph.fitView();
   // 平移图到中心将对齐到画布中心，但不缩放
   graph.fitCenter();
+
+  // 单击如果是叶节点请求新数据添加进去
+  graph.on('node:click', (evt) => {
+    const item = evt.item;
+    const id = item.get('id');
+    const model = item.getModel();
+    const children = model.children;
+    if (!children || children.length === 0) {
+      // 右边学生
+      if (model.direction === 2) {
+        getStudentTree({ mid: id, depth: 3 })
+          .then((res) => {
+            return res.data;
+          })
+          .then((data) => {
+            const childData = data['children'];
+            if (!(childData === undefined || childData == null)) {
+              graph.updateChildren(childData, id);
+            } else {
+              emit('warningMessage', '当前节点没有子节点');
+            }
+          });
+        // 左边导师
+      } else {
+        getAdvisorTree({ mid: id, depth: 3 })
+          .then((res) => {
+            return res.data;
+          })
+          .then((data) => {
+            const childData = data['children'];
+            if (!(childData === undefined || childData == null)) {
+              graph.updateChildren(childData, id);
+            } else {
+              emit('warningMessage', '当前节点没有子节点');
+            }
+          });
+      }
+    }
+  });
+
+  // 双击跳转相应详情界面
+  graph.on('node:dblclick', (evt) => {
+    const item = evt.item; // 被操作的节点 item
+    emit('jump', item.get('id'));
+  });
 
   if (typeof window !== 'undefined')
     window.onresize = () => {
