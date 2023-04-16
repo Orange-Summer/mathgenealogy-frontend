@@ -16,3 +16,12 @@ export const getYearClassificationCount = (payload: { start: number; end: number
       return res.data;
     });
 };
+
+export const getClassificationCountWithYear = (payload: { start: number; end: number }) => {
+  const { start, end } = payload;
+  return axios
+      .get(`${YEAR_MODULE}/getClassificationCountWithYear?start=${start}&end=${end}`)
+      .then((res) => {
+        return res.data;
+      });
+};

@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -35,9 +35,57 @@ const router = createRouter({
           }
         },
         {
-          path: 'year',
-          name: 'year',
-          component: () => import('@/views/YearDividedInfo.vue'),
+          path: 'year1',
+          name: 'YearInfoLine',
+          component: () => import('@/views/YearInfo1.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'year2',
+          name: 'YearInfo2',
+          component: () => import('@/views/YearInfo2.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'year3',
+          name: 'YearInfo3',
+          component: () => import('@/views/YearInfo3.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'year4',
+          name: 'YearInfo4',
+          component: () => import('@/views/YearInfo4.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'country1',
+          name: 'CountryInfo1',
+          component: () => import('@/views/CountryInfo1.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'country2',
+          name: 'CountryInfo2',
+          component: () => import('@/views/CountryInfo2.vue'),
+          meta: {
+            keepAlive: false
+          }
+        },
+        {
+          path: 'country3',
+          name: 'CountryInfo3',
+          component: () => import('@/views/CountryInfo3.vue'),
           meta: {
             keepAlive: true
           }
@@ -45,6 +93,6 @@ const router = createRouter({
       ]
     }
   ]
-})
+});
 
-export default router
+export default router;
