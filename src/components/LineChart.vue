@@ -35,7 +35,9 @@ function createChart(data) {
     container: container,
     theme: 'classic',
     width: 1150,
-    height: 600
+    height: 600,
+    paddingLeft: 60,
+    paddingRight: 100
   });
 
   chart

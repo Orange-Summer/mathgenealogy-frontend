@@ -56,12 +56,13 @@
 
 <script setup lang="ts">
 import LineChart from '@/components/LineChart.vue';
-import { onMounted, reactive, ref } from 'vue';
-import {
-  getAllCountry,
-  getSingleCountryClassificationWithYear
-} from '@/api/country';
+import { onMounted, reactive, watch } from 'vue';
+import { getSingleCountryClassificationWithYear } from '@/api/country';
 import { ElMessage } from 'element-plus';
+import { useSelectStore } from '@/stores/counter';
+import { storeToRefs } from 'pinia';
+
+const store = useSelectStore();
 
 interface formType {
   country: string;
@@ -79,7 +80,7 @@ const form: formType = reactive({
   }
 });
 
-let countryList = ref<Array<string | undefined>>([]);
+const countryList = store.countryList;
 
 const paneData = reactive([
   {
@@ -91,13 +92,6 @@ const paneData = reactive([
     show: false
   }
 ]);
-
-function loadAllCountry() {
-  getAllCountry().then((res) => {
-    countryList.value = res.data;
-    // countryList.value.unshift('all');
-  });
-}
 
 function loadSingleCountryClassificationWithYear(country: string, start: number, end: number) {
   getSingleCountryClassificationWithYear({
@@ -115,10 +109,9 @@ function loadSingleCountryClassificationWithYear(country: string, start: number,
 }
 
 function init() {
-  form.country = 'UnitedStates';
-  form.yearRange.start = '1900';
-  form.yearRange.end = '1950';
-  loadAllCountry();
+  form.country = store.country;
+  form.yearRange.start = store.yearRange.start;
+  form.yearRange.end = store.yearRange.end;
   loadSingleCountryClassificationWithYear(
     form.country,
     parseInt(form.yearRange.start),
@@ -136,11 +129,22 @@ function updateData() {
     parseInt(form.yearRange.start),
     parseInt(form.yearRange.end)
   );
+  store.changeCountry(form.country);
+  store.changeYearRange(form.yearRange.start, form.yearRange.end);
   // if (form.countries.length > 1) {
   //
   // } else if (form.countries[0] == 'all') {
   // }
 }
+
+const { country } = storeToRefs(store);
+
+watch(
+  () => [country, store.yearRange],
+  () => {
+    init();
+  }
+);
 </script>
 
 <style scoped></style>

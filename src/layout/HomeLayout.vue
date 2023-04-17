@@ -37,8 +37,10 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { onMounted, reactive } from 'vue';
 import SubMenu from '@/components/SubMenu.vue';
+import { getAllCountry } from '@/api/country';
+import { useSelectStore } from '@/stores/counter';
 
 const data = reactive([
   {
@@ -102,6 +104,19 @@ const data = reactive([
     ]
   }
 ]);
+
+const store = useSelectStore();
+
+function loadAllCountry() {
+  getAllCountry().then((res) => {
+    store.saveCountryList(res.data);
+    // countryList.value.unshift('all');
+  });
+}
+
+onMounted(() => {
+  loadAllCountry();
+});
 </script>
 
 <style scoped>

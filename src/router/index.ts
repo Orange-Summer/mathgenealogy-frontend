@@ -47,7 +47,7 @@ const router = createRouter({
           name: 'YearInfo2',
           component: () => import('@/views/YearInfo2.vue'),
           meta: {
-            keepAlive: true
+            keepAlive: false
           }
         },
         {

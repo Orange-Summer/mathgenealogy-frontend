@@ -51,9 +51,12 @@
 
 <script setup lang="ts">
 import LineChart from '@/components/LineChart.vue';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getClassificationCountWithYear } from '@/api/year';
+import { useSelectStore } from '@/stores/counter';
+
+const store = useSelectStore();
 
 interface formType {
   yearRange: {
@@ -70,8 +73,8 @@ const form: formType = reactive({
 });
 
 function init() {
-  form.yearRange.start = '1900';
-  form.yearRange.end = '1950';
+  form.yearRange.start = store.yearRange.start;
+  form.yearRange.end = store.yearRange.end;
   loadClassificationCountWithYear(parseInt(form.yearRange.start), parseInt(form.yearRange.end));
 }
 
@@ -81,7 +84,12 @@ onMounted(() => {
 
 function updateData() {
   loadClassificationCountWithYear(parseInt(form.yearRange.start), parseInt(form.yearRange.end));
+  store.changeYearRange(form.yearRange.start, form.yearRange.end);
 }
+
+watch(store.yearRange, () => {
+  init();
+});
 
 const paneData = reactive([
   {

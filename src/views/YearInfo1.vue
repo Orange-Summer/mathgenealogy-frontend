@@ -56,9 +56,12 @@
 
 <script setup lang="ts">
 import LineChart from '@/components/LineChart.vue';
-import { onMounted, reactive, ref } from 'vue';
-import { getAllCountry, getCountryCountLine } from '@/api/country';
+import { onMounted, reactive, watch } from 'vue';
+import { getCountryCountLine } from '@/api/country';
 import { ElMessage } from 'element-plus';
+import { useSelectStore } from '@/stores/counter';
+
+const store = useSelectStore();
 
 interface formType {
   countries: string[];
@@ -76,20 +79,12 @@ const form: formType = reactive({
   }
 });
 
-let countryList = ref<Array<string | undefined>>([]);
-
-function loadAllCountry() {
-  getAllCountry().then((res) => {
-    countryList.value = res.data;
-    // countryList.value.unshift('all');
-  });
-}
+const countryList = store.countryList;
 
 function init() {
   form.countries[0] = 'UnitedStates';
-  form.yearRange.start = '1900';
-  form.yearRange.end = '1950';
-  loadAllCountry();
+  form.yearRange.start = store.yearRange.start;
+  form.yearRange.end = store.yearRange.end;
   loadCountryCountLine(
     form.countries,
     parseInt(form.yearRange.start),
@@ -107,11 +102,16 @@ function updateData() {
     parseInt(form.yearRange.start),
     parseInt(form.yearRange.end)
   );
+  store.changeYearRange(form.yearRange.start, form.yearRange.end);
   // if (form.countries.length > 1) {
   //
   // } else if (form.countries[0] == 'all') {
   // }
 }
+
+watch(store.yearRange, () => {
+  init();
+});
 
 const paneData = reactive([
   {

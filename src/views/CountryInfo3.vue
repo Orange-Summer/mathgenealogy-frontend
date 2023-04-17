@@ -53,10 +53,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
-import { getAllCountry, getSingleCountryClassification } from '@/api/country';
+import { onMounted, reactive, watch } from 'vue';
+import { getSingleCountryClassification } from '@/api/country';
 import PieChart from '@/components/PieChart.vue';
 import { ElMessage } from 'element-plus';
+import { useSelectStore } from '@/stores/counter';
+import { storeToRefs } from 'pinia';
+
+const store = useSelectStore();
 
 interface formType {
   country: string;
@@ -74,7 +78,7 @@ const form: formType = reactive({
   }
 });
 
-let countryList = ref<Array<string | undefined>>([]);
+const countryList = store.countryList;
 
 const paneData = reactive([
   {
@@ -85,12 +89,6 @@ const paneData = reactive([
     show: false
   }
 ]);
-
-function loadAllCountry() {
-  getAllCountry().then((res) => {
-    countryList.value = res.data;
-  });
-}
 
 function loadSingleCountryClassification(country: string, start: number, end: number) {
   getSingleCountryClassification({
@@ -108,10 +106,9 @@ function loadSingleCountryClassification(country: string, start: number, end: nu
 }
 
 function init() {
-  form.country = 'UnitedStates';
-  form.yearRange.start = '1900';
-  form.yearRange.end = '1950';
-  loadAllCountry();
+  form.country = store.country;
+  form.yearRange.start = store.yearRange.start;
+  form.yearRange.end = store.yearRange.end;
   loadSingleCountryClassification(
     form.country,
     parseInt(form.yearRange.start),
@@ -129,7 +126,18 @@ function updateData() {
     parseInt(form.yearRange.start),
     parseInt(form.yearRange.end)
   );
+  store.changeCountry(form.country);
+  store.changeYearRange(form.yearRange.start, form.yearRange.end);
 }
+
+const { country } = storeToRefs(store);
+
+watch(
+  () => [country, store.yearRange],
+  () => {
+    init();
+  }
+);
 </script>
 
 <style scoped></style>

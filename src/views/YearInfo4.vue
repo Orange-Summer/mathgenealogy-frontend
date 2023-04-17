@@ -48,10 +48,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import { getYearClassificationCount } from '@/api/year';
 import { ElMessage } from 'element-plus';
 import PieChart from '@/components/PieChart.vue';
+import { useSelectStore } from '@/stores/counter';
+
+const store = useSelectStore();
 
 interface formType {
   yearRange: {
@@ -88,8 +91,14 @@ function loadYearClassificationData(start: number, end: number) {
   });
 }
 
+function init() {
+  form.yearRange.start = store.yearRange.start;
+  form.yearRange.end = store.yearRange.end;
+  loadYearClassificationData(parseInt(form.yearRange.start), parseInt(form.yearRange.end));
+}
+
 onMounted(() => {
-  loadYearClassificationData(1700, 1750);
+  init();
 });
 
 const loading = ref(false);
@@ -97,8 +106,13 @@ const loading = ref(false);
 function updateData() {
   loading.value = true;
   loadYearClassificationData(parseInt(form.yearRange.start), parseInt(form.yearRange.end));
+  store.changeYearRange(form.yearRange.start, form.yearRange.end);
   loading.value = false;
 }
+
+watch(store.yearRange, () => {
+  init();
+});
 </script>
 
 <style scoped></style>

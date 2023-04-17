@@ -48,10 +48,13 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import { getYearCountryCount } from '@/api/year';
 import { ElMessage } from 'element-plus';
 import PieChart from '@/components/PieChart.vue';
+import { useSelectStore } from '@/stores/counter';
+
+const store = useSelectStore();
 
 interface formType {
   yearRange: {
@@ -62,8 +65,8 @@ interface formType {
 
 const form: formType = reactive({
   yearRange: {
-    start: '1700',
-    end: '1750'
+    start: '0',
+    end: '0'
   }
 });
 
@@ -89,8 +92,14 @@ function loadYearCountryData(start: number, end: number) {
   });
 }
 
+function init() {
+  form.yearRange.start = store.yearRange.start;
+  form.yearRange.end = store.yearRange.end;
+  loadYearCountryData(parseInt(form.yearRange.start), parseInt(form.yearRange.end));
+}
+
 onMounted(() => {
-  loadYearCountryData(1700, 1750);
+  init();
 });
 
 const loading = ref(false);
@@ -98,8 +107,13 @@ const loading = ref(false);
 function updateData() {
   loading.value = true;
   loadYearCountryData(parseInt(form.yearRange.start), parseInt(form.yearRange.end));
+  store.changeYearRange(form.yearRange.start, form.yearRange.end);
   loading.value = false;
 }
+
+watch(store.yearRange, () => {
+  init();
+});
 </script>
 
 <style scoped></style>
