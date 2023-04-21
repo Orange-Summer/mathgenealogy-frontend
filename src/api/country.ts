@@ -85,3 +85,21 @@ export const getSingleCountryClassificationWithYear = (payload: {
       return res.data;
     });
 };
+
+export const getKnowledgeFlowOut = (payload: { country: string; start: number; end: number }) => {
+  const { country, start, end } = payload;
+  return axios
+    .get(`${COUNTRY_MODULE}/getKnowledgeFlowOut?country=${country}&start=${start}&end=${end}`)
+    .then((res) => {
+      return res.data;
+    });
+};
+
+export const getKnowledgeFlowIn = (payload: { country: string; start: number; end: number }) => {
+  const { country, start, end } = payload;
+  return axios
+      .get(`${COUNTRY_MODULE}/getKnowledgeFlowIn?country=${country}&start=${start}&end=${end}`)
+      .then((res) => {
+        return res.data;
+      });
+};

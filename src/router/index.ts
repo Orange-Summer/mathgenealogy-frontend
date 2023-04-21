@@ -89,6 +89,22 @@ const router = createRouter({
           meta: {
             keepAlive: true
           }
+        },
+        {
+          path: 'country4',
+          name: 'CountryInfo4',
+          component: () => import('@/views/CountryInfo4.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'country5',
+          name: 'CountryInfo5',
+          component: () => import('@/views/CountryInfo5.vue'),
+          meta: {
+            keepAlive: true
+          }
         }
       ]
     }

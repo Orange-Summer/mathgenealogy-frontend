@@ -100,6 +100,16 @@ const data = reactive([
         title: '一个国家各学科数学家数量总计扇形图',
         index: '/country3',
         content: '一个国家各学科数学家数量总计扇形图'
+      },
+      {
+        title: '一个国家知识流出图',
+        index: '/country4',
+        content: '一个国家知识流出图'
+      },
+      {
+        title: '一个国家知识流入图',
+        index: '/country5',
+        content: '一个国家知识流入图'
       }
     ]
   }

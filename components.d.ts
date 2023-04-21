@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ArcMap: typeof import('./src/components/ArcMap.vue')['default']
     ColumnChart: typeof import('./src/components/ColumnChart.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
