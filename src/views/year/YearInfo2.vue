@@ -1,37 +1,11 @@
 <template>
-  <el-row> 筛选条件</el-row>
-  <el-row>
-    <el-form :label-position="'right'">
-      <el-form-item label="年份范围">
-        <el-col :span="6">
-          <el-date-picker
-            v-model="form.yearRange.start"
-            type="year"
-            format="YYYY"
-            value-format="YYYY"
-            label="start year"
-            placeholder="start year"
-            style="width: 100%"
-          />
-        </el-col>
-        <el-col class="text-center" :span="1" style="text-align: center">-</el-col>
-        <el-col :span="6">
-          <el-date-picker
-            v-model="form.yearRange.end"
-            type="year"
-            format="YYYY"
-            value-format="YYYY"
-            label="end year"
-            placeholder="end year"
-            style="width: 100%"
-          />
-        </el-col>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="updateData">确认</el-button>
-      </el-form-item>
-    </el-form>
-  </el-row>
+  <FilterComponent
+    :showCountry="false"
+    :showClassification="false"
+    v-model:yearStart="form.yearRange.start"
+    v-model:year-end="form.yearRange.end"
+    @updateData="updateData"
+  ></FilterComponent>
   <el-row>
     <el-tabs type="border-card" :stretch="true">
       <el-tab-pane v-for="(item, index) in paneData" :key="index" :label="item.label">
@@ -54,7 +28,8 @@ import LineChart from '@/components/LineChart.vue';
 import { onMounted, reactive, watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getClassificationCountWithYear } from '@/api/year';
-import { useSelectStore } from '@/stores/counter';
+import { useSelectStore } from '@/stores/filter';
+import FilterComponent from "@/components/FilterComponent.vue";
 
 const store = useSelectStore();
 

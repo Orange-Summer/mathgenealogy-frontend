@@ -37,7 +37,7 @@ const router = createRouter({
         {
           path: 'year1',
           name: 'YearInfoLine',
-          component: () => import('@/views/YearInfo1.vue'),
+          component: () => import('@/views/year/YearInfo1.vue'),
           meta: {
             keepAlive: true
           }
@@ -45,7 +45,7 @@ const router = createRouter({
         {
           path: 'year2',
           name: 'YearInfo2',
-          component: () => import('@/views/YearInfo2.vue'),
+          component: () => import('@/views/year/YearInfo2.vue'),
           meta: {
             keepAlive: false
           }
@@ -53,7 +53,7 @@ const router = createRouter({
         {
           path: 'year3',
           name: 'YearInfo3',
-          component: () => import('@/views/YearInfo3.vue'),
+          component: () => import('@/views/year/YearInfo3.vue'),
           meta: {
             keepAlive: true
           }
@@ -61,7 +61,7 @@ const router = createRouter({
         {
           path: 'year4',
           name: 'YearInfo4',
-          component: () => import('@/views/YearInfo4.vue'),
+          component: () => import('@/views/year/YearInfo4.vue'),
           meta: {
             keepAlive: true
           }
@@ -69,7 +69,7 @@ const router = createRouter({
         {
           path: 'country1',
           name: 'CountryInfo1',
-          component: () => import('@/views/CountryInfo1.vue'),
+          component: () => import('@/views/country/CountryInfo1.vue'),
           meta: {
             keepAlive: true
           }
@@ -77,7 +77,7 @@ const router = createRouter({
         {
           path: 'country2',
           name: 'CountryInfo2',
-          component: () => import('@/views/CountryInfo2.vue'),
+          component: () => import('@/views/country/CountryInfo2.vue'),
           meta: {
             keepAlive: false
           }
@@ -85,7 +85,7 @@ const router = createRouter({
         {
           path: 'country3',
           name: 'CountryInfo3',
-          component: () => import('@/views/CountryInfo3.vue'),
+          component: () => import('@/views/country/CountryInfo3.vue'),
           meta: {
             keepAlive: true
           }
@@ -93,7 +93,7 @@ const router = createRouter({
         {
           path: 'country4',
           name: 'CountryInfo4',
-          component: () => import('@/views/CountryInfo4.vue'),
+          component: () => import('@/views/country/CountryInfo4.vue'),
           meta: {
             keepAlive: true
           }
@@ -101,7 +101,15 @@ const router = createRouter({
         {
           path: 'country5',
           name: 'CountryInfo5',
-          component: () => import('@/views/CountryInfo5.vue'),
+          component: () => import('@/views/country/CountryInfo5.vue'),
+          meta: {
+            keepAlive: true
+          }
+        },
+        {
+          path: 'ranking',
+          name: 'Ranking',
+          component: () => import('@/views/DescendantRanking.vue'),
           meta: {
             keepAlive: true
           }

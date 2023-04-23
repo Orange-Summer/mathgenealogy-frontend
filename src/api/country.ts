@@ -2,12 +2,6 @@ import axios from 'axios';
 import qs from 'qs';
 import { COUNTRY_MODULE } from '@/api/_prefix';
 
-export const getAllCountry = () => {
-  return axios.get(`${COUNTRY_MODULE}/getAllCountry`).then((res) => {
-    return res.data;
-  });
-};
-
 export const getSingleCountryClassification = (payload: {
   country: string;
   start: number;

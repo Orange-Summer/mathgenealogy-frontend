@@ -6,9 +6,11 @@ export const useSelectStore = defineStore('select', () => {
     start: '1950',
     end: '2000'
   });
-  const country = ref('UnitedStates');
+  const country = ref<string>('UnitedStates');
 
-  const countryList = ref<Array<string | undefined>>([]);
+  const countryList = ref<string[]>([]);
+
+  const classificationList = ref<string[]>(['Computer science']);
 
   function changeYearRange(start: string, end: string) {
     yearRange.start = start;
@@ -23,5 +25,18 @@ export const useSelectStore = defineStore('select', () => {
     countryList.value = countries;
   }
 
-  return { yearRange, country, countryList, changeYearRange, changeCountry, saveCountryList };
+  function saveClassificationList(classifications: string[]) {
+    classificationList.value = classifications;
+  }
+
+  return {
+    yearRange,
+    country,
+    countryList,
+    classificationList,
+    changeYearRange,
+    changeCountry,
+    saveCountryList,
+    saveClassificationList
+  };
 });

@@ -39,8 +39,8 @@
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
 import SubMenu from '@/components/SubMenu.vue';
-import { getAllCountry } from '@/api/country';
-import { useSelectStore } from '@/stores/counter';
+import { useSelectStore } from '@/stores/filter';
+import { getAllClassification, getAllCountry } from '@/api/basic';
 
 const data = reactive([
   {
@@ -112,6 +112,11 @@ const data = reactive([
         content: '一个国家知识流入图'
       }
     ]
+  },
+  {
+    title: '后代排名',
+    index: '/ranking',
+    content: '后代排名'
   }
 ]);
 
@@ -124,8 +129,15 @@ function loadAllCountry() {
   });
 }
 
+function loadAllClassification() {
+  getAllClassification().then((res) => {
+    store.saveClassificationList(res.data);
+  });
+}
+
 onMounted(() => {
   loadAllCountry();
+  loadAllClassification();
 });
 </script>
 

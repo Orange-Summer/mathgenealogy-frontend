@@ -1,42 +1,12 @@
 <template>
-  <el-row> 筛选条件</el-row>
-  <el-row>
-    <el-form :label-position="'right'">
-      <el-form-item label="国家">
-        <el-select v-model="form.country" filterable placeholder="Select">
-          <el-option v-for="item in countryList" :key="item" :value="item" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="年份范围">
-        <el-col :span="6">
-          <el-date-picker
-            v-model="form.yearRange.start"
-            type="year"
-            format="YYYY"
-            value-format="YYYY"
-            label="start year"
-            placeholder="start year"
-            style="width: 100%"
-          />
-        </el-col>
-        <el-col class="text-center" :span="1" style="text-align: center">-</el-col>
-        <el-col :span="6">
-          <el-date-picker
-            v-model="form.yearRange.end"
-            type="year"
-            format="YYYY"
-            value-format="YYYY"
-            label="end year"
-            placeholder="end year"
-            style="width: 100%"
-          />
-        </el-col>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="updateData">确认</el-button>
-      </el-form-item>
-    </el-form>
-  </el-row>
+  <FilterComponent
+    :multiple-select="false"
+    :showClassification="false"
+    v-model:country="form.country"
+    v-model:yearStart="form.yearRange.start"
+    v-model:year-end="form.yearRange.end"
+    @updateData="updateData"
+  ></FilterComponent>
   <el-row>
     <el-tabs type="border-card" :stretch="true">
       <el-tab-pane v-for="(item, index) in paneData" :key="index" :label="item.label" lazy>
@@ -55,12 +25,13 @@
 </template>
 
 <script setup lang="ts">
-import { useSelectStore } from '@/stores/counter';
+import { useSelectStore } from '@/stores/filter';
 import { onMounted, reactive, watch } from 'vue';
 import { getKnowledgeFlowOut } from '@/api/country';
 import { ElMessage } from 'element-plus';
 import { storeToRefs } from 'pinia';
 import ArcMap from '@/components/ArcMap.vue';
+import FilterComponent from '@/components/FilterComponent.vue';
 
 const store = useSelectStore();
 
@@ -79,8 +50,6 @@ const form: formType = reactive({
     end: '0'
   }
 });
-
-const countryList = store.countryList;
 
 const paneData = reactive([
   {
