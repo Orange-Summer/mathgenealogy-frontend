@@ -13,7 +13,7 @@
     <el-table :data="tableData" stripe border table-layout="auto">
       <!-- 每一个列，prop为主键，label为文案 -->
       <!-- 索引 -->
-      <el-table-column type="index"></el-table-column>
+      <el-table-column type="index" label="序号" width="60"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="country" label="国家"></el-table-column>
       <el-table-column prop="classification" label="领域"></el-table-column>

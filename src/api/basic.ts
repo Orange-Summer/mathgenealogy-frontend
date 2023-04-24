@@ -71,3 +71,9 @@ export const getRanking = (payload: {
       return res.data;
     });
 };
+
+export const getSameClassificationPercentage = () => {
+  return axios.get(`${BASIC_MODULE}/getSameClassificationPercentage`).then((res) => {
+    return res.data;
+  });
+};

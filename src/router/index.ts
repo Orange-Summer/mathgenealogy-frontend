@@ -113,6 +113,14 @@ const router = createRouter({
           meta: {
             keepAlive: true
           }
+        },
+        {
+          path: 'sameClassificationPercentage',
+          name: 'SameClassificationPercentage',
+          component: () => import('@/views/SameClassificationPercentage.vue'),
+          meta: {
+            keepAlive: true
+          }
         }
       ]
     }

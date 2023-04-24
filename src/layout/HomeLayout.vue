@@ -114,9 +114,14 @@ const data = reactive([
     ]
   },
   {
-    title: '后代排名',
+    title: '后代数量排名',
     index: '/ranking',
-    content: '后代排名'
+    content: '后代数量排名'
+  },
+  {
+    title: '各领域导师学生相同领域比例',
+    index: '/sameClassificationPercentage',
+    content: '各领域导师学生相同领域比例'
   }
 ]);
 
