@@ -8,19 +8,21 @@
       <el-descriptions-item label="年份">{{ data.detail.year }}</el-descriptions-item>
       <el-descriptions-item label="论文">{{ data.detail.dissertation }}</el-descriptions-item>
       <el-descriptions-item label="领域">{{ data.detail.classification }}</el-descriptions-item>
+      <el-descriptions-item label="后代数量">{{ data.detail.descendant }}</el-descriptions-item>
       <el-descriptions-item label="数学家谱系项目链接">
         <a :href="url" target="_blank">{{ url }}</a>
       </el-descriptions-item>
     </el-descriptions>
   </el-row>
   <el-row>
-    <el-col :span="8">
+    <el-col :span="10">
       <el-card shadow="hover">
         <template #header>
           <span>导师</span>
         </template>
-        <el-table :data="data.detail.advisors">
+        <el-table :data="data.detail.advisors" stripe table-layout="auto">
           <el-table-column prop="name" label="姓名" />
+          <el-table-column prop="descendant" label="后代数量" />
           <el-table-column label="操作">
             <template #default="scope">
               <el-button size="small" @click="handlePerson(scope.$index, 1)">详情</el-button>
@@ -29,13 +31,14 @@
         </el-table>
       </el-card>
     </el-col>
-    <el-col :span="8" :offset="1">
+    <el-col :span="10" :offset="1">
       <el-card shadow="hover">
         <template #header>
           <span>学生</span>
         </template>
-        <el-table :data="data.detail.students">
+        <el-table :data="data.detail.students" stripe table-layout="auto">
           <el-table-column prop="name" label="姓名" />
+          <el-table-column prop="descendant" label="后代数量" />
           <el-table-column label="操作">
             <template #default="scope">
               <el-button size="small" @click="handlePerson(scope.$index, 2)">详情</el-button>
@@ -83,16 +86,19 @@ let data = reactive({
     year: 0,
     dissertation: '',
     classification: 0,
+    descendant: 0,
     advisors: [
       {
         mid: 0,
-        name: ''
+        name: '',
+        descendant: 0
       }
     ],
     students: [
       {
         mid: 0,
-        name: ''
+        name: '',
+        descendant: 0
       }
     ]
   }

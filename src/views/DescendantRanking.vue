@@ -13,6 +13,46 @@
     <el-table :data="tableData" stripe border table-layout="auto">
       <!-- 每一个列，prop为主键，label为文案 -->
       <!-- 索引 -->
+      <el-table-column type="expand">
+        <template #default="props">
+          <el-row style="margin-top: 0">
+            <h3>Advisor</h3>
+            <el-table
+              :data="props.row.advisors"
+              border
+              :default-sort="{ prop: 'descendants', order: 'descending' }"
+            >
+              <el-table-column prop="name" label="姓名"></el-table-column>
+              <el-table-column prop="country" label="国家"></el-table-column>
+              <el-table-column prop="classification" label="领域"></el-table-column>
+              <el-table-column prop="year" label="年份" width="70"></el-table-column>
+              <el-table-column prop="descendants" label="后代数量" sortable></el-table-column>
+              <el-table-column label="操作">
+                <template #default="scope">
+                  <el-button size="small" @click="handlePerson(scope.row.mid)">详情</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <h3>Student</h3>
+            <el-table
+              :data="props.row.students"
+              border
+              :default-sort="{ prop: 'descendants', order: 'descending' }"
+            >
+              <el-table-column prop="name" label="姓名"></el-table-column>
+              <el-table-column prop="country" label="国家"></el-table-column>
+              <el-table-column prop="classification" label="领域"></el-table-column>
+              <el-table-column prop="year" label="年份" width="70"></el-table-column>
+              <el-table-column prop="descendants" label="后代数量" sortable></el-table-column>
+              <el-table-column label="操作">
+                <template #default="scope">
+                  <el-button size="small" @click="handlePerson(scope.row.mid)">详情</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </el-row>
+        </template>
+      </el-table-column>
       <el-table-column type="index" label="序号" width="60"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="country" label="国家"></el-table-column>
@@ -21,7 +61,7 @@
       <el-table-column prop="descendants" label="后代数量"></el-table-column>
       <el-table-column label="操作">
         <template #default="scope">
-          <el-button size="small" @click="handlePerson(scope.$index)">详情</el-button>
+          <el-button size="small" @click="handlePerson(scope.row.mid)">详情</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -34,7 +74,6 @@ import { onMounted, reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { getRanking } from '@/api/basic';
 import { ElMessage } from 'element-plus';
-import { useSelectStore } from '@/stores/filter';
 
 interface formType {
   countries: string[];
@@ -67,11 +106,11 @@ const tableData = ref<ranking[]>([]);
 // 跳转其他人详情界面
 const router = useRouter();
 
-function handlePerson(index: number) {
-  const id = tableData.value[index].mid;
+function handlePerson(mid: number) {
+  // const id = tableData.value[index].mid;
   router.push({
     name: 'person',
-    params: { id: id }
+    params: { id: mid }
   });
 }
 
@@ -97,13 +136,11 @@ function loadRanking(
   });
 }
 
-const store = useSelectStore();
-
 function init() {
-  form.countries[0] = store.country;
-  form.classifications[0] = 'Computer science';
-  form.yearRange.start = store.yearRange.start;
-  form.yearRange.end = store.yearRange.end;
+  form.countries[0] = 'all';
+  form.classifications[0] = 'all';
+  form.yearRange.start = '1600';
+  form.yearRange.end = '2023';
   form.limit = 100;
   loadRanking(
     form.countries,
