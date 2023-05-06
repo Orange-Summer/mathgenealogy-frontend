@@ -68,7 +68,7 @@ watch(store.yearRange, () => {
 
 const paneData = reactive([
   {
-    label: '各学科数学家数量变化比较',
+    label: '各领域数学家数量变化比较',
     data: [],
     id: 'classification',
     x: 'year',

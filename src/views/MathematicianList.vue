@@ -16,7 +16,6 @@
     <!-- 查询、新增按钮 -->
     <el-col :span="3" :offset="1">
       <el-button type="primary">查询</el-button>
-      <el-button type="primary">新增</el-button>
     </el-col>
   </el-row>
   <el-row>
@@ -51,7 +50,6 @@
         <template #default="scope">
           <el-button size="small" @click="handlePerson(scope.$index)">详情</el-button>
           <el-button size="small">编辑</el-button>
-          <el-button size="small" type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>

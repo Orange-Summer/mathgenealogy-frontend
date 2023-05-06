@@ -47,7 +47,7 @@ const form: formType = reactive({
 
 const paneData = reactive([
   {
-    label: '一个时间段各学科数学家数量总计',
+    label: '一个时间段各领域数学家数量总计',
     data: [],
     id: 'classification',
     value: 'num',

@@ -36,7 +36,7 @@ const paneData = reactive([
     show: false
   },
   {
-    label: '各学科数学家数量',
+    label: '各领域数学家数量',
     data: [],
     x: 'classification',
     y: 'num',

@@ -64,9 +64,9 @@ const data = reactive([
         content: '各国数学家数量变化比较折线图'
       },
       {
-        title: '各学科数学家数量变化比较折线图',
+        title: '各领域数学家数量变化比较折线图',
         index: '/year2',
-        content: '各学科数学家数量变化比较折线图'
+        content: '各领域数学家数量变化比较折线图'
       },
       {
         title: '一个时间段各国数学家数量总计',
@@ -74,9 +74,9 @@ const data = reactive([
         content: '一个时间段各国数学家数量总计扇形图'
       },
       {
-        title: '一个时间段各学科数学家数量总计',
+        title: '一个时间段各领域数学家数量总计',
         index: '/year4',
-        content: '一个时间段各学科数学家数量总计扇形图'
+        content: '一个时间段各领域数学家数量总计扇形图'
       }
     ]
   },
@@ -92,14 +92,14 @@ const data = reactive([
       },
 
       {
-        title: '一个国家各学科数学家数量变化折线图',
+        title: '一个国家各领域数学家数量变化折线图',
         index: '/country2',
-        content: '一个国家各学科数学家数量变化折线图'
+        content: '一个国家各领域数学家数量变化折线图'
       },
       {
-        title: '一个国家各学科数学家数量总计扇形图',
+        title: '一个国家各领域数学家数量总计扇形图',
         index: '/country3',
-        content: '一个国家各学科数学家数量总计扇形图'
+        content: '一个国家各领域数学家数量总计扇形图'
       },
       {
         title: '一个国家知识流出图',
@@ -119,9 +119,9 @@ const data = reactive([
     content: '后代数量排名'
   },
   {
-    title: '各领域导师学生相同领域比例',
+    title: '各领域导师学生研究相同领域比例',
     index: '/sameClassificationPercentage',
-    content: '各领域导师学生相同领域比例'
+    content: '各领域导师学生研究相同领域比例'
   }
 ]);
 

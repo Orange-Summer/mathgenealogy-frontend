@@ -53,7 +53,7 @@ const form: formType = reactive({
 
 const paneData = reactive([
   {
-    label: '一个国家各学科数学家数量变化',
+    label: '一个国家各领域数学家数量变化',
     data: [],
     id: 'classification',
     x: 'year',

@@ -32,7 +32,7 @@
           </el-form-item>
         </template>
       </template>
-      <!--是否有学科选择-->
+      <!--是否有领域选择-->
       <template v-if="showClassification">
         <el-form-item label="主题" prop="classifications">
           <el-select v-model="classifications" filterable placeholder="Select" multiple>
