@@ -121,6 +121,14 @@ const router = createRouter({
           meta: {
             keepAlive: true
           }
+        },
+        {
+          path: 'averageNum',
+          name: 'AverageNum',
+          component: () => import('@/views/AverageNum.vue'),
+          meta: {
+            keepAlive: true
+          }
         }
       ]
     }

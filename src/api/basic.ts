@@ -77,3 +77,9 @@ export const getSameClassificationPercentage = () => {
     return res.data;
   });
 };
+
+export const getAverage = () => {
+  return axios.get(`${BASIC_MODULE}/getAverage`).then((res) => {
+    return res.data;
+  });
+};

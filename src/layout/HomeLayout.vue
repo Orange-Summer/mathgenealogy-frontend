@@ -122,6 +122,11 @@ const data = reactive([
     title: '各领域导师学生研究相同领域比例',
     index: '/sameClassificationPercentage',
     content: '各领域导师学生研究相同领域比例'
+  },
+  {
+    title: '各国人均数学家数量',
+    index: '/averageNum',
+    content: '各国人均数学家数量'
   }
 ]);
 
