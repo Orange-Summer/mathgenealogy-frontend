@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import { reactive, ref, watchEffect } from 'vue';
 import { onBeforeRouteLeave, useRoute, useRouter } from 'vue-router';
-import TreeGraph from '@/components/TreeGraph.vue';
+import TreeGraph from '@/components/graph/TreeGraph.vue';
 import { getMathematician } from '@/api/basic';
 import { getTree } from '@/api/graph';
 import { ElMessage } from 'element-plus';

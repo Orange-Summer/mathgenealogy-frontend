@@ -14,7 +14,7 @@ const emit = defineEmits(['jump', 'warningMessage']);
 let data = JSON.parse(JSON.stringify(props.data));
 // 画布实例和挂载容器
 let graph;
-const container = ref(null);
+const container = ref();
 
 onMounted(() => {
   createGraph();
@@ -30,8 +30,8 @@ onMounted(() => {
 
 //画树图
 function createGraph() {
-  const width = container.value.scrollWidth;
-  const height = container.value.scrollHeight || 500;
+  // const width = container.value.scrollWidth;
+  // const height = container.value.scrollHeight || 500;
   graph = new G6.TreeGraph({
     // 图的  DOM 容器，可以传入该 DOM 的 id 或者直接传入容器的 HTML 节点对象
     container: container.value,

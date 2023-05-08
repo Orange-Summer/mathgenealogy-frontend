@@ -30,7 +30,7 @@ import { onMounted, reactive, watch } from 'vue';
 import { getKnowledgeFlowIn } from '@/api/country';
 import { ElMessage } from 'element-plus';
 import { storeToRefs } from 'pinia';
-import ArcMap from '@/components/ArcMap.vue';
+import ArcMap from '@/components/graph/ArcMap.vue';
 import FilterComponent from '@/components/FilterComponent.vue';
 
 const store = useSelectStore();

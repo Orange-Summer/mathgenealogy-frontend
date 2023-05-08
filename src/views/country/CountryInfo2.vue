@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import LineChart from '@/components/LineChart.vue';
+import LineChart from '@/components/graph/LineChart.vue';
 import { onMounted, reactive, watch } from 'vue';
 import { getSingleCountryClassificationWithYear } from '@/api/country';
 import { ElMessage } from 'element-plus';

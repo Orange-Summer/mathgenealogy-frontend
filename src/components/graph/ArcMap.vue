@@ -2,14 +2,14 @@
   <div class="sceneContainer"></div>
 </template>
 
-<script setup>
-import { LineLayer, Scene } from '@antv/l7';
+<script setup lang="ts">
+import { type ILayer, LineLayer, Scene } from '@antv/l7';
 import { GaodeMap } from '@antv/l7-maps';
 import { onMounted, watchEffect } from 'vue';
 
 const props = defineProps(['data', 'index', 'x', 'y', 'x1', 'y1']);
 
-let layer;
+let layer: ILayer;
 // eslint-disable-next-line vue/no-setup-props-destructure
 let data = props.data;
 // eslint-disable-next-line vue/no-setup-props-destructure
@@ -43,8 +43,8 @@ onMounted(() => {
   });
 });
 
-function createScene(data) {
-  const container = document.getElementsByClassName('sceneContainer')[index];
+function createScene(data: any) {
+  const container = document.getElementsByClassName('sceneContainer')[index] as HTMLDivElement;
   const scene = new Scene({
     id: container,
     map: new GaodeMap({

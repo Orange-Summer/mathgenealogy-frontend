@@ -9,8 +9,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ArcMap: typeof import('./src/components/ArcMap.vue')['default']
-    ColumnChart: typeof import('./src/components/ColumnChart.vue')['default']
+    ArcMap: typeof import('./src/components/graph/ArcMap.vue')['default']
+    ColumnChart: typeof import('./src/components/graph/ColumnChart.vue')['default']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
@@ -38,11 +38,11 @@ declare module '@vue/runtime-core' {
     ElTabPane: typeof import('element-plus/es')['ElTabPane']
     ElTabs: typeof import('element-plus/es')['ElTabs']
     FilterComponent: typeof import('./src/components/FilterComponent.vue')['default']
-    LineChart: typeof import('./src/components/LineChart.vue')['default']
-    PieChart: typeof import('./src/components/PieChart.vue')['default']
+    LineChart: typeof import('./src/components/graph/LineChart.vue')['default']
+    PieChart: typeof import('./src/components/graph/PieChart.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SubMenu: typeof import('./src/components/SubMenu.vue')['default']
-    TreeGraph: typeof import('./src/components/TreeGraph.vue')['default']
+    SubMenu: typeof import('./src/components/graph/SubMenu.vue')['default']
+    TreeGraph: typeof import('./src/components/graph/TreeGraph.vue')['default']
   }
 }

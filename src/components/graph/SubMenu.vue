@@ -20,7 +20,7 @@
     </el-menu-item>
   </template>
 </template>
-<script setup>
+<script setup lang="ts">
 defineProps(['subMenuList']);
 </script>
 

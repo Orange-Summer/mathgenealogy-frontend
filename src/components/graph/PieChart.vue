@@ -2,13 +2,13 @@
   <div class="chartContainer"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, watchEffect } from 'vue';
 import { Chart } from '@antv/g2';
 
 const props = defineProps(['data', 'id', 'value', 'index']);
 
-let chart;
+let chart: Chart;
 // eslint-disable-next-line vue/no-setup-props-destructure
 let data = props.data;
 // eslint-disable-next-line vue/no-setup-props-destructure
@@ -27,8 +27,8 @@ onMounted(() => {
   });
 });
 
-function createChart(data) {
-  const container = document.getElementsByClassName('chartContainer')[index];
+function createChart(data: any) {
+  const container = document.getElementsByClassName('chartContainer')[index] as HTMLElement;
   // 初始化图表实例
   chart = new Chart({
     container: container,

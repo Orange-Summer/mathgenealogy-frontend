@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-import LineChart from '@/components/LineChart.vue';
+import LineChart from '@/components/graph/LineChart.vue';
 import { onMounted, reactive, watch } from 'vue';
 import { ElMessage } from 'element-plus';
 import { getClassificationCountWithYear } from '@/api/year';

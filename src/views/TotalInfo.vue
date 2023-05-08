@@ -18,7 +18,7 @@
 import { getClassificationCount, getCountryCount, getInstitutionCount } from '@/api/basic';
 import { onMounted, reactive } from 'vue';
 import { ElMessage } from 'element-plus';
-import ColumnChart from '@/components/ColumnChart.vue';
+import ColumnChart from '@/components/graph/ColumnChart.vue';
 
 const paneData = reactive([
   {

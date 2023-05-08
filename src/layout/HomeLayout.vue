@@ -38,7 +38,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive } from 'vue';
-import SubMenu from '@/components/SubMenu.vue';
+import SubMenu from '@/components/graph/SubMenu.vue';
 import { useSelectStore } from '@/stores/filter';
 import { getAllClassification, getAllCountry } from '@/api/basic';
 

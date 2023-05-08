@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, watch } from 'vue';
 import { getSingleCountryClassification } from '@/api/country';
-import PieChart from '@/components/PieChart.vue';
+import PieChart from '@/components/graph/PieChart.vue';
 import { ElMessage } from 'element-plus';
 import { useSelectStore } from '@/stores/filter';
 import { storeToRefs } from 'pinia';

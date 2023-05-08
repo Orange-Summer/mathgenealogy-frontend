@@ -2,13 +2,13 @@
   <div class="lineChartContainer"></div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { Chart } from '@antv/g2';
 import { onMounted, watchEffect } from 'vue';
 
 const props = defineProps(['data', 'id', 'x', 'y', 'index']);
 
-let chart;
+let chart: Chart;
 // eslint-disable-next-line vue/no-setup-props-destructure
 let data = props.data;
 // eslint-disable-next-line vue/no-setup-props-destructure
@@ -29,8 +29,8 @@ onMounted(() => {
   });
 });
 
-function createChart(data) {
-  const container = document.getElementsByClassName('lineChartContainer')[index];
+function createChart(data: any) {
+  const container = document.getElementsByClassName('lineChartContainer')[index] as HTMLElement;
   chart = new Chart({
     container: container,
     theme: 'classic',
@@ -56,7 +56,7 @@ function createChart(data) {
       }
     });
 
-  chart.interaction('tooltip', { filter: (d, i) => i < 10 });
+  chart.interaction('tooltip', { filter: (d: any, i: number) => i < 10 });
 
   chart.render();
 }

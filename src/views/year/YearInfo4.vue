@@ -25,7 +25,7 @@
 import { onMounted, reactive, ref, watch } from 'vue';
 import { getYearClassificationCount } from '@/api/year';
 import { ElMessage } from 'element-plus';
-import PieChart from '@/components/PieChart.vue';
+import PieChart from '@/components/graph/PieChart.vue';
 import { useSelectStore } from '@/stores/filter';
 import FilterComponent from '@/components/FilterComponent.vue';
 

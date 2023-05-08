@@ -49,7 +49,6 @@
       <el-table-column label="操作" width="200px">
         <template #default="scope">
           <el-button size="small" @click="handlePerson(scope.$index)">详情</el-button>
-          <el-button size="small">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
