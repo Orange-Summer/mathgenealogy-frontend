@@ -34,7 +34,7 @@
       </template>
       <!--是否有领域选择-->
       <template v-if="showClassification">
-        <el-form-item label="主题" prop="classifications">
+        <el-form-item label="领域" prop="classifications">
           <el-select v-model="classifications" filterable placeholder="Select" multiple>
             <template v-if="groupSelect">
               <el-option-group label="all">
