@@ -26,6 +26,7 @@ onMounted(() => {
   watchEffect(() => {
     data = props.data;
     chart.changeData(data);
+    chart.render();
   });
 });
 

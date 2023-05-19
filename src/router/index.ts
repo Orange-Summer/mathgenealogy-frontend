@@ -23,7 +23,7 @@ const router = createRouter({
           name: 'person',
           component: () => import('@/views/MathematicianDetail.vue'),
           meta: {
-            keepAlive: true
+            keepAlive: false
           }
         },
         {
